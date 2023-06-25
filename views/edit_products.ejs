@@ -1,0 +1,39 @@
+<%- include('layout/header')  %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto mt-4">
+            <div class="card shadow">
+                <div class="card-header bg-success">
+                    <h3 class="text-light">Edit Product (<%= product.name %>)</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form action="/update/<%= product._id %>" method="post" id="add-form" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <lable for="name">Name</lable>
+                            <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter name" value="<%= product.name %>" required/>
+                        </div>
+                        <div class="mb-3">
+                            <lable for="description">Description</lable>
+                            <input type="text" name="description" class="form-control form-control-lg" placeholder="Enter description" value="<%= product.description %>" required/>
+                        </div>
+                        <div class="mb-3">
+                            <lable for="price">Price</lable>
+                            <input type="text" name="price" class="form-control form-control-lg" placeholder="Enter price"value="<%= product.price %>" required/>
+                        </div>
+                        <div class="mb-3">
+                            <lable for="image" class="form-lable">Select Image</lable>
+                            <input class="form-control form-control-lg" type="file" name="image" />
+                            <img src="/<%= product.image %>" width="100" class="img-thumbnail mt-1">
+                        </div>
+                        <input type="hidden" name="ole_image" value="<%= product.image %>">
+                        <div class="mb-3 d-grid">
+                            <input type="submit" name="submit" value="update User" class="btn btn-success btn-lg"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('layout/footer')  %>
