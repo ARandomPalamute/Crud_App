@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage }).single('image');
 
-//insert an user into database route
+//insert an product into database route
 router.post('/add', upload, async (req, res) => {
     try {
         const product = new Product({
@@ -27,7 +27,7 @@ router.post('/add', upload, async (req, res) => {
         await product.save();
         req.session.message = {
             type: 'success',
-            message: 'User added successfully!',
+            message: 'Product added successfully!',
         };
         res.redirect('/');
     } catch (error) {
@@ -52,7 +52,7 @@ router.get('/add', (req, res) => {
     res.render('add_products', { title: 'Add Product' });
 });
 
-//edit an user route
+//edit an product route
 router.get("/edit/:id", (req, res) => {
     let id = req.params.id;
     Product.findById(id).exec()
@@ -71,7 +71,7 @@ router.get("/edit/:id", (req, res) => {
         });
 })
 
-//update user
+//update product
 router.post("/update/:id", upload, (req, res) => {
     let id = req.params.id;
     let new_image = "";
@@ -95,7 +95,7 @@ router.post("/update/:id", upload, (req, res) => {
         .then(result => {
             req.session.message = {
                 type: 'success',
-                message: "User updated successfully!",
+                message: "Product updated successfully!",
             };
             res.redirect("/");
         })
@@ -104,7 +104,7 @@ router.post("/update/:id", upload, (req, res) => {
         });
 });
 
-//delete user
+//delete product
 router.get("/delete/:id", (req, res) => {
     let id = req.params.id;
     Product.findByIdAndRemove(id).exec()
@@ -118,7 +118,7 @@ router.get("/delete/:id", (req, res) => {
             }
             req.session.message = {
                 type: "info",
-                message: "User deleted successfully!",
+                message: "Product deleted successfully!",
             };
             res.redirect("/");
         })
